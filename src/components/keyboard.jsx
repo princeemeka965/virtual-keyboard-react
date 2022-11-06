@@ -2,6 +2,7 @@ import React from "react";
 import { keyClass, setIcons } from "../helpers/keysHelpers";
 
 export default function KeyBoard(props) {
+    const theme = props.theme;
     const keyElems = [
         "~",
         "1",
@@ -75,14 +76,14 @@ export default function KeyBoard(props) {
     return (
         <>
             {props.open ? (
-                <div className='w-full flex'>
+                <div className='w-full flex' theme={theme}>
                     <div className="fixed left-0 bottom-0 w-full p-2 keyboard">
                         <div className="flex w-full justify-center">
                             <div style={{ maxWidth: '1098px', marginLeft: '-2%' }}>
-                                <div className="text-center w-full grid gap-2" style={{ gridTemplateColumns: 'repeat(30, 30px)', gridTemplateRows: 'repeat(5, 50px)' }}>
+                                <div className="text-center w-full grid gap-2" style={{ gridTemplateColumns: 'repeat(30, 1.875em)', gridTemplateRows: 'repeat(5, 45px)' }}>
                                     {keyElems.map((keys, index) =>
                                         <button
-                                            className={`keyboard__key text-white outline-none cursor-pointer inline-flex items-center justify-center ${keyClass(keys)}`}
+                                            className={`keyboard__key outline-none cursor-pointer inline-flex items-center justify-center ${keyClass(keys)}`}
                                             key={index}
                                             title={keys}
                                         >

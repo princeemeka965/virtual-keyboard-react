@@ -4,9 +4,15 @@ import KeyBoard from "./components/keyboard";
 export default function App() {
 
     const [showKeyBoard, setValues] = useState(false);
+    const [theme, setTheme] = useState('dark--theme');
 
     const displayKeyBoard = () => {
         setValues(!showKeyBoard);
+    }
+
+    const setKeyBoardTheme = (value) => {
+        const themeVal = value === 'dark--theme' ? 'light--theme' : 'dark--theme';
+        setTheme(themeVal);
     }
 
     return (
@@ -24,7 +30,16 @@ export default function App() {
                     ></textarea>
                 </div>
 
-                <KeyBoard open={ showKeyBoard } />
+                <div className="w-full flex justify-center">
+                    {showKeyBoard ? (
+                        <button className="p-2 my-10 text-base rounded-md btn" theme={theme} onClick={() => setKeyBoardTheme(theme)}>
+                            {theme === 'light--theme' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                        </button>
+                    ) : ('')
+                    }
+                </div>
+
+                <KeyBoard open={ showKeyBoard } theme={theme} />
             </div>
         </>
     )
