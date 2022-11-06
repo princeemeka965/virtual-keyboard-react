@@ -12,10 +12,9 @@ body {
   user-select: none;
   transition: bottom 0.4s;
 }
+
 .keyboard__key {
   height: 45px;
-  width: 6%;
-  margin: 0.2%;
   border-radius: 4px;
   border: none;
   background: rgba(255, 255, 255, 0.2);
@@ -27,12 +26,6 @@ body {
 }
 .keyboard__key:focus {
   background: rgba(255, 255, 255, 0.12);
-}
-.keyboard__key--wide {
-  width: 12.5%;
-}
-.keyboard__key--extra-wide {
-  min-width: 70%;
 }
 .keyboard__key--activatable::after {
   content: "";
@@ -47,4 +40,7 @@ body {
 }
 .keyboard__key--dark {
   background: rgba(0, 0, 0, 0.25);
+}
+.col-span-16 {
+  grid-column: span 16;
 }
