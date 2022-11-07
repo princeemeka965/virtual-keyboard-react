@@ -40,4 +40,41 @@ function setIcons(props) {
     }
 }
 
-export { keyClass, setIcons }
+
+function handleKeyClick(node, target) {
+    const targetVal = target.current?.value;
+    targetVal = "n";
+    console.log(targetVal);
+   /* switch (node) {
+        case "Tab":
+            node?.blur();
+            break;
+        case "Enter":
+            // Enters a new line
+            targetValue += "\n";
+            Object.preventExtensions(targetValue);
+            node?.blur();
+            break;
+        case "Space":
+            targetValue += " ";
+            Object.preventExtensions(targetValue);
+            node?.blur();
+            break;
+        case "Backspace":
+            targetValue = target.substring(
+                0,
+                target.length - 1
+            );
+            node?.blur();
+            Object.preventExtensions(targetValue);
+            break;
+        default:
+            targetValue += node?.value;
+            break;
+    }
+    // Focus back to the textarea field after every action taken
+    target.focus();
+    */
+}
+
+export { keyClass, setIcons, handleKeyClick }

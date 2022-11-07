@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { keyClass, setIcons } from "../helpers/keysHelpers";
 
 export default function KeyBoard(props) {
     const theme = props.theme;
+    const btnRef = useRef([]);
     const keyElems = [
         "~",
         "1",
@@ -73,6 +74,31 @@ export default function KeyBoard(props) {
         "Windows",
     ];
 
+    const handleKeyClick = (node) => {
+        switch (node.textContent) {
+            case "Tab":
+                node.blur();
+                break;
+            case "keyboard_return":
+                // Enters a new line
+                props.textValue("\n");
+                node.blur();
+                break;
+            case "":
+                props.textValue(" ");
+                node.blur();
+                break;
+            case "backspace":
+                props.textValue("del");
+                node.blur();
+                break;
+            default:
+                props.textValue(node.textContent);
+                node.blur();
+                break;
+        }
+    }
+
     return (
         <>
             {props.open ? (
@@ -86,6 +112,8 @@ export default function KeyBoard(props) {
                                             className={`keyboard__key outline-none cursor-pointer inline-flex items-center justify-center ${keyClass(keys)}`}
                                             key={index}
                                             title={keys}
+                                            ref={(el) => (btnRef.current[index] = el)}
+                                            onClick={() => handleKeyClick(btnRef.current[index])}
                                         >
                                             {iconKeys.includes(keys) ? (
                                                 <i
