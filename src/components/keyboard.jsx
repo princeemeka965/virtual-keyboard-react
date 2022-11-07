@@ -30,7 +30,7 @@ export default function KeyBoard(props) {
         "p",
         "[",
         "]",
-        "#",
+        "slash",
         "CapsLock",
         "a",
         "s",
@@ -44,7 +44,7 @@ export default function KeyBoard(props) {
         ";",
         "'",
         "Enter",
-        "Close",
+        "Shift",
         "z",
         "x",
         "c",
@@ -55,22 +55,19 @@ export default function KeyBoard(props) {
         ",",
         ".",
         "/",
-        "?",
         "Shift",
         "Ctrl",
         "Windows",
-        "Space",
         "Alt",
+        "Space",
+        "AltGr",
         "Ctrl",
+        "Fn"
     ];
 
     const iconKeys = [
         "Backspace",
-        "CapsLock",
-        "Tab",
         "Enter",
-        "Close",
-        "Shift",
         "Space",
         "Windows",
     ];
@@ -81,8 +78,8 @@ export default function KeyBoard(props) {
                 <div className='w-full flex'>
                     <div className="fixed left-0 bottom-0 w-full p-2 keyboard">
                         <div className="flex w-full justify-center">
-                            <div className="w-3/5">
-                                <div className="text-center">
+                            <div style={{ maxWidth: '1098px', marginLeft: '-2%' }}>
+                                <div className="text-center w-full grid gap-2" style={{ gridTemplateColumns: 'repeat(30, 30px)', gridTemplateRows: 'repeat(5, 50px)' }}>
                                     {keyElems.map((keys, index) =>
                                         <button
                                             className={`keyboard__key text-white outline-none cursor-pointer inline-flex items-center justify-center ${keyClass(keys)}`}
@@ -96,9 +93,14 @@ export default function KeyBoard(props) {
                                                     {keys !== "Windows" ? setIcons(keys) : ""}
                                                 </i>
                                             ) : (
-                                                <span>
-                                                    {keys}
-                                                </span>
+                                                keys === "slash" ?
+                                                    <span>
+                                                        \
+                                                    </span>
+                                                    :
+                                                    <span>
+                                                        {keys}
+                                                    </span>
                                             )
                                             }
                                         </button>

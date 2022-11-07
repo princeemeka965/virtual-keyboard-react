@@ -1,21 +1,23 @@
 function keyClass(props) {
     switch (props) {
         case "Tab":
-            return "keyboard__key--wide";
+            return "col-span-3";
+        case "slash":
+            return "col-span-3";
         case "Shift":
-            return "keyboard__key--wide keyboard__key--activatable";
+            return "col-span-5";
         case "Backspace":
-            return "keyboard__key--wide";
+            return "col-span-4";
         case "CapsLock":
-            return "keyboard__key--wide keyboard__key--activatable";
+            return "col-span-4";
         case "Enter":
-            return "keyboard__key--wide";
+            return "col-span-4";
         case "Space":
-            return "keyboard__key--extra-wide";
-        case "Close":
-            return "keyboard__key--wide";
+            return "col-span-16 col-span-2";
+        case "Ctrl":
+            return "col-span-3";
         default:
-            return "";
+            return "col-span-2";
     }
 }
 
@@ -23,8 +25,6 @@ function setIcons(props) {
     switch (props) {
         case "Tab":
             return "keyboard_tab";
-        case "Shift":
-            return "arrow_upward";
         case "Backspace":
             return "backspace";
         case "CapsLock":
