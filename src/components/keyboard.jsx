@@ -64,14 +64,22 @@ export default function KeyBoard(props) {
         "Space",
         "AltGr",
         "Ctrl",
-        "Fn"
+        "Fn",
     ];
 
-    const iconKeys = [
+    const iconKeys = ["Backspace", "Enter", "Space", "Windows"];
+
+    const specialKeys = [
         "Backspace",
+        "CapsLock",
+        "Tab",
         "Enter",
+        "Close",
+        "Shift",
         "Space",
         "Windows",
+        "Alt",
+        "Ctrl",
     ];
 
     const handleKeyClick = (node) => {
@@ -84,7 +92,7 @@ export default function KeyBoard(props) {
                 props.textValue("\n");
                 node.blur();
                 break;
-            case "":
+            case "space_bar":
                 props.textValue(" ");
                 node.blur();
                 break;
@@ -93,23 +101,39 @@ export default function KeyBoard(props) {
                 node.blur();
                 break;
             default:
-                props.textValue(node.textContent);
+                if (
+                    node.textContent !== " " &&
+                    node.textContent !== "Alt" &&
+                    node.textContent !== "Ctrl" &&
+                    node.textContent !== "AltGr" &&
+                    node.textContent !== "Fn"
+                ) {
+                    props.textValue(node.textContent);
+                }
                 node.blur();
                 break;
         }
-    }
+    };
 
     return (
         <>
             {props.open ? (
-                <div className='w-full flex' theme={theme}>
+                <div className="w-full flex" theme={theme}>
                     <div className="fixed left-0 bottom-0 w-full p-2 keyboard">
                         <div className="flex w-full justify-center">
-                            <div style={{ maxWidth: '1098px', marginLeft: '-2%' }}>
-                                <div className="text-center w-full grid gap-2" style={{ gridTemplateColumns: 'repeat(30, 1.875em)', gridTemplateRows: 'repeat(5, 45px)' }}>
-                                    {keyElems.map((keys, index) =>
+                            <div style={{ maxWidth: "1098px", marginLeft: "-2%" }}>
+                                <div
+                                    className="text-center w-full grid gap-2"
+                                    style={{
+                                        gridTemplateColumns: "repeat(30, 1.875em)",
+                                        gridTemplateRows: "repeat(5, 45px)",
+                                    }}
+                                >
+                                    {keyElems.map((keys, index) => (
                                         <button
-                                            className={`keyboard__key outline-none cursor-pointer inline-flex items-center justify-center ${keyClass(keys)}`}
+                                            className={`keyboard__key outline-none cursor-pointer inline-flex items-center justify-center ${keyClass(
+                                                keys
+                                            )}`}
                                             key={index}
                                             title={keys}
                                             ref={(el) => (btnRef.current[index] = el)}
@@ -117,33 +141,28 @@ export default function KeyBoard(props) {
                                         >
                                             {iconKeys.includes(keys) ? (
                                                 <i
-                                                    className={`${keys === 'Windows' ? 'fa fa-windows' : 'material-icons'}`}
+                                                    className={`${keys === "Windows"
+                                                            ? "fa fa-windows"
+                                                            : "material-icons"
+                                                        }`}
                                                 >
-                                                    {keys !== "Windows" ? setIcons(keys) : ""}
+                                                    {keys !== "Windows" ? setIcons(keys) : " "}
                                                 </i>
+                                            ) : keys === "slash" ? (
+                                                <span>\</span>
                                             ) : (
-                                                keys === "slash" ?
-                                                    <span>
-                                                        \
-                                                    </span>
-                                                    :
-                                                    <span>
-                                                        {keys}
-                                                    </span>
-                                            )
-                                            }
+                                                <span>{keys}</span>
+                                            )}
                                         </button>
-                                    )}
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             ) : (
-                ''
-            )
-            }
+                ""
+            )}
         </>
-    )
-
+    );
 }
