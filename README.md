@@ -8,7 +8,7 @@ Virtual Keyboard build with React
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:9050
+# serve with hot reload at localhost:9500
 npm run start
 
 # build for production with minification

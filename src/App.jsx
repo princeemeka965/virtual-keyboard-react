@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import KeyBoard from "./components/keyboard";
 
 export default function App() {
 
+    const textareaRef = useRef(null);
+
     const [showKeyBoard, setValues] = useState(false);
     const [theme, setTheme] = useState('dark--theme');
+    const [textareaVal, setTextAreaValue] = useState('');
 
     const displayKeyBoard = () => {
         setValues(!showKeyBoard);
@@ -13,6 +16,19 @@ export default function App() {
     const setKeyBoardTheme = (value) => {
         const themeVal = value === 'dark--theme' ? 'light--theme' : 'dark--theme';
         setTheme(themeVal);
+    }
+
+    const updateTextarea = (value) => {
+        if (value === "del") {
+            setTextAreaValue(textareaVal.substring(
+                0,
+                textareaVal.length - 1
+            ));
+        }
+        
+        if(value === "enter") {
+            setTextAreaValue(textareaVal + value);
+        }
     }
 
     return (
@@ -27,6 +43,9 @@ export default function App() {
                         className="use-keyboard-input w-1/3 h-40 border inset-11"
                         style={{ margin: '0 auto' }}
                         onClick={() => displayKeyBoard()}
+                        ref={textareaRef}
+                        onChange={(e) => setTextAreaValue(e.target.value)}
+                        value={textareaVal}
                     ></textarea>
                 </div>
 
@@ -39,7 +58,7 @@ export default function App() {
                     }
                 </div>
 
-                <KeyBoard open={ showKeyBoard } theme={theme} />
+                <KeyBoard open={showKeyBoard} theme={theme} textValue={updateTextarea} />
             </div>
         </>
     )
