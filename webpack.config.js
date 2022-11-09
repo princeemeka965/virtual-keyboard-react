@@ -12,7 +12,7 @@ module.exports = {
   /** "entry"
    * the entry point
    */
-  entry: "./index.js",
+  entry: "./public/main.js",
   output: {
     /** "path"
      * the folder path of the output file
