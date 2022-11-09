@@ -1,10 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { keyClass, setIcons } from "../helpers/keysHelpers";
 
 export default function KeyBoard(props) {
     const theme = props.theme;
     const btnRef = useRef([]);
-    const keyElems = [
+    const [capsState, setCapsLock] = useState(false);
+    const [shiftState, setShiftState] = useState(false);
+
+    let keyArray = [
         "~",
         "1",
         "2",
@@ -80,7 +83,56 @@ export default function KeyBoard(props) {
         "Windows",
         "Alt",
         "Ctrl",
+        "slash",
+        "AltGr",
+        "Fn"
     ];
+
+    let numberKeys = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "0",
+        "-",
+        "=",
+        "[",
+        "]",
+        ";",
+        "'",
+        ",",
+        ".",
+        "/"
+    ];
+    
+    let symbolKeys = [
+        "!",
+        "''",
+        "£",
+        "$",
+        "%",
+        "^",
+        "&",
+        "*",
+        "(",
+        ")",
+        "_",
+        "+",
+        "{",
+        "}",
+        ":",
+        "@",
+        "<",
+        ">",
+        "?"
+    ];
+
+    const [keyElems, setKeys] = useState(keyArray);
 
     const handleKeyClick = (node) => {
         switch (node.textContent) {
@@ -100,6 +152,16 @@ export default function KeyBoard(props) {
                 props.textValue("del");
                 node.blur();
                 break;
+            case "CapsLock":
+                setCapsLock(!capsState);
+                capsLock();
+                node.blur();
+                break;
+            case "Shift":
+                setShiftState(!shiftState);
+                shiftKey();
+                node.blur();
+                break;
             default:
                 if (
                     node.textContent !== " " &&
@@ -114,6 +176,50 @@ export default function KeyBoard(props) {
                 break;
         }
     };
+
+    const capsLock = () => {
+        const upper = keyArray.map((element) => {
+            if (!specialKeys.includes(element)) {
+                return element.toUpperCase();
+            } else {
+                return element;
+            }
+        });
+        const lower = keyArray.map((element) => {
+            if (!specialKeys.includes(element)) {
+                return element.toLowerCase();
+            } else {
+                return element;
+            }
+        });
+        capsState ? (setKeys(lower)) : (setKeys(upper));
+        setShiftState(!capsState)
+    }
+
+    const shiftKey = () => {
+        const symbols = keyArray.map((element) => {
+            if (numberKeys.includes(element)) {
+                return symbolKeys[numberKeys.indexOf(element)];
+            }
+            if (!specialKeys.includes(element)) {
+                return element.toUpperCase();
+            } else {
+                return element;
+            }
+        });
+        const numbers = keyArray.map((element) => {
+            if (symbolKeys.includes(element)) {
+                return numberKeys[symbolKeys.indexOf(element)];
+            }
+            if (!specialKeys.includes(element)) {
+                return element.toLowerCase();
+            } else {
+                return element;
+            }
+        });
+        shiftState ? (setKeys(numbers)) : (setKeys(symbols));
+        setCapsLock(!shiftState);
+    }
 
     return (
         <>

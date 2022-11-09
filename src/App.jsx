@@ -20,8 +20,10 @@ export default function App() {
   const updateTextarea = (value) => {
     if (value === "del") {
       setTextAreaValue(textareaVal.substring(0, textareaVal.length - 1));
+      textareaRef.current?.focus();
     } else {
       setTextAreaValue(textareaVal + value);
+      textareaRef.current?.focus();
     }
   };
 
