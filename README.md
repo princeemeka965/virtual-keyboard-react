@@ -5,6 +5,9 @@ Virtual Keyboard build with React
 ## Build Setup
 
 ```bash
+# clone repo
+On your terminal, git clone https://github.com/princeemeka965/virtual-keyboard-react.git to clone this repo
+
 # install dependencies
 npm install
 
