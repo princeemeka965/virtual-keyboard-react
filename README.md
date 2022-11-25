@@ -20,6 +20,10 @@ npm run build
 Focus on the textarea to toggle display of the virtual KeyBoard
 
 ```bash
+
+# Theme
+You can swith from light mode to dark mode and vice-versa.
+
 # CapsLock
 CapsLock key toggles between upper and lowercase for all keys.
 
